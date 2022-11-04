@@ -20,9 +20,9 @@ namespace CovidTracker.Controllers
         {
             await _covidService.SaveCovid(covid);
 
-            IQueryable<Covid> covids = _covidService.GetList();
+            // IQueryable<Covid> covids = _covidService.GetList();
 
-            return Ok(covids);
+            return Ok(_covidService.GetCovidTrackerList());
         }
 
         [HttpGet]
