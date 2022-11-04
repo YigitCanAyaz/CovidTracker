@@ -18,5 +18,13 @@ namespace CovidTracker.Models
         {
             return _context.Covids.AsQueryable();
         }
+
+        public async Task SaveCovid(Covid covid)
+        {
+            await _context.Covids.AddAsync(covid);
+            await _context.SaveChangesAsync();
+            // inform hub when it's added
+            await _hubContext.Clients.All.SendAsync("ReceiveCovidList", "data");
+        }
     }
 }
